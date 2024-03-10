@@ -129,6 +129,8 @@ public class Main {
         // Аналізуємо текст на наявність повторів слів в реченнях та виводимо текст
         System.out.println('\n');
         analyzeText(text, words);
+
+        System.out.println("\nNumber of words in the text: " + countWordsInText(text));
     }
 
     static String WhiteSpacesReplacement(Text text) {
@@ -153,7 +155,7 @@ public class Main {
     }
 
     // Метод, що перевіряє наявність слова в реченні
-    private static boolean containsWord(Sentence sentence, Word word) {
+    static boolean containsWord(Sentence sentence, Word word) {
         Object[] sentenceElements = sentence.getSentence();
 
         for(Object element : sentenceElements){
@@ -161,5 +163,20 @@ public class Main {
                 return true;
         }
         return false;
+    }
+
+    // Метод для підрахунку кількості слів в тексті
+    static int countWordsInText(Text text) {
+        int wordCount = 0;
+        Sentence[] sentences = text.getText();
+        for (Sentence sentence : sentences) {
+            Object[] sentenceElements = sentence.getSentence();
+            for (Object element : sentenceElements) {
+                if (element instanceof Word) {
+                    wordCount++;
+                }
+            }
+        }
+        return wordCount;
     }
 }
